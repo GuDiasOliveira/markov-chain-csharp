@@ -128,6 +128,7 @@ namespace MarkovChainCSharp
             res = markov.GetProbability('C', 'D', 0);
             AssertEquals(0.0, res, 0.0001);
 
+            // condition: state letter must be after B
             res = markov.GetProbability('C', 2, state => state > 'B');
             AssertEquals(12.0 / 36, res, 0.0001);
         }

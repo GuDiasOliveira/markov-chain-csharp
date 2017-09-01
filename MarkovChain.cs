@@ -62,6 +62,8 @@ namespace MarkovChainCSharp
             }
             set
             {
+                if (m_states.Contains(value))
+                    throw new ArgumentException("Cannot set duplicate states");
                 m_states[i] = value;
             }
         }
@@ -79,7 +81,12 @@ namespace MarkovChainCSharp
                 int size = Size;
                 m_states.Clear();
                 for (int i = 0; i < size; i++)
-                    m_states.Add(value[i]);
+                {
+                    T state = value[i];
+                    if (m_states.Contains(state))
+                        throw new ArgumentException("Cannot have duplicate states");
+                    m_states.Add(state);
+                }
             }
         }
 
@@ -112,7 +119,10 @@ namespace MarkovChainCSharp
             m_states.Clear();
             for (int i = 0; i < size; i++)
             {
-                m_states.Add(states[i]);
+                T state = states[i];
+                if (m_states.Contains(state))
+                    throw new ArgumentException("Cannot have duplicate states");
+                m_states.Add(state);
                 for (int j = 0; j < size; j++)
                     m_transitionMatrix[i,j] = transitionMatrix[i,j];
             }
