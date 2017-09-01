@@ -38,6 +38,22 @@ namespace MarkovChainCSharp
             }
         }
 
+        public double this[T fromState, T toState]
+        {
+            get
+            {
+                int i = m_states.IndexOf(fromState);
+                int j = m_states.IndexOf(toState);
+                return m_transitionMatrix[i, j];
+            }
+            set
+            {
+                int i = m_states.IndexOf(fromState);
+                int j = m_states.IndexOf(toState);
+                m_transitionMatrix[i, j] = value;
+            }
+        }
+
         public T this[int i]
         {
             get
